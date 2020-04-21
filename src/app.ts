@@ -12,9 +12,8 @@ export class Application {
   }
 
   private async initHttpServer(coreContainer: Container): Promise<void> {
-    const httpServer = new HttpInterface({ coreContainer });
+    const httpServer = new HttpInterface({ coreContainer, env: this.config.env });
     httpServer.serve();
-    console.info(`HTTP server started in port 3000`);
   }
 
   /**

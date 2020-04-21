@@ -10,17 +10,23 @@ import { SessionController } from './controllers/session';
 import { errorHandler } from './middlewares/errorHandler';
 import { validator } from './middlewares/validator';
 
-
 interface IHttpInterface {
   serve(): void;
 }
 
+type Config = {
+  env: typeof import('../../utils/env').default;
+  coreContainer: Container;
+};
+
 export class HttpInterface implements IHttpInterface {
   private app?: express.Application;
-  private coreContainer: Container;
+  private readonly coreContainer: Container;
+  private readonly env: Config['env'];
 
   constructor(config: any) {
     this.coreContainer = config.coreContainer;
+    this.env = config.env;
   }
 
   initApp() {
@@ -64,6 +70,8 @@ export class HttpInterface implements IHttpInterface {
     this.setupNotFound();
 
     this.app?.use(errorHandler);
-    this.app?.listen(3000);
+    this.app?.listen(this.env.httpPort);
+
+    console.info(`http linstening on port ${this.env.httpPort}`)
   }
 }
