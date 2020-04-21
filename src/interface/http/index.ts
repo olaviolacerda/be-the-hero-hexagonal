@@ -7,6 +7,7 @@ import { IncidentController } from './controllers/incident';
 import { OngController } from './controllers/ong';
 import { ProfileController } from './controllers/profile';
 import { SessionController } from './controllers/session';
+import { validator } from './middlewares/validator';
 
 interface IHttpInterface {
   serve(): void;
@@ -31,10 +32,10 @@ export class HttpInterface implements IHttpInterface {
 
   setupRoutes() {
     [
-      new OngController(this.coreContainer),
-      new IncidentController(this.coreContainer),
-      new ProfileController(this.coreContainer),
-      new SessionController(this.coreContainer),
+      new OngController({ coreContainer: this.coreContainer, validator }),
+      new IncidentController({ coreContainer: this.coreContainer, validator }),
+      new ProfileController({ coreContainer: this.coreContainer, validator }),
+      new SessionController({ coreContainer: this.coreContainer, validator }),
     ]
       .forEach((route: IHttpRoute) => {
         const router = express.Router({ mergeParams: true });

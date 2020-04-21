@@ -1,20 +1,23 @@
 import { NextFunction, Request, Response } from 'express';
 import httpStatus from 'http-status-codes';
-import { Container } from '../../../types/core';
 import { HttpRouter, IHttpRoute } from '../../../types/interface/http';
 import { IProfileUseCase } from '../../../types/profile';
+import { getProfile } from '../schemas/profile';
 
 export class ProfileController implements IHttpRoute {
   private readonly profileUseCase: IProfileUseCase;
+  private readonly _validator: Function;
 
-  constructor({ profileUseCase }: Container) {
-    this.profileUseCase = profileUseCase;
+  constructor({ coreContainer, validator }: any) {
+    this._validator = validator;
+    this.profileUseCase = coreContainer.profileUseCase;
   }
 
   register(router: HttpRouter) {
     router
       .route('/profile')
       .get(
+        this._validator(getProfile),
         this.findAllProfileIncidents.bind(this),
       );
   }

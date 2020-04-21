@@ -1,19 +1,22 @@
 import httpStatus from 'http-status-codes';
-import { Container } from '../../../types/core';
 import { HttpNext, HttpRequest, HttpResponse, HttpRouter, IHttpRoute } from '../../../types/interface/http';
 import { IOngUseCase } from '../../../types/ong';
+import { postOng } from '../schemas/ong';
 
 export class OngController implements IHttpRoute {
   private readonly ongUseCase: IOngUseCase;
+  private readonly _validator: Function;
 
-  constructor({ ongUseCase }: Container) {
-    this.ongUseCase = ongUseCase;
+  constructor({ coreContainer, validator }: any) {
+    this._validator = validator;
+    this.ongUseCase = coreContainer.ongUseCase;
   }
 
   register(router: HttpRouter) {
     router
       .route('/ongs')
       .post(
+        this._validator(postOng),
         this.createOng.bind(this),
       )
       .get(

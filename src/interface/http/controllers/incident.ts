@@ -1,22 +1,26 @@
 import httpStatus from 'http-status-codes';
-import { Container } from '../../../types/core';
 import { IIncidentUseCase } from '../../../types/incident';
 import { HttpNext, HttpRequest, HttpResponse, HttpRouter, IHttpRoute } from '../../../types/interface/http';
+import { getIncidents, postIncident } from '../schemas/incident';
 
 export class IncidentController implements IHttpRoute {
   private readonly incidentUseCase: IIncidentUseCase;
+  private readonly _validator: Function;
 
-  constructor({ incidentUseCase }: Container) {
-    this.incidentUseCase = incidentUseCase;
+  constructor({ coreContainer, validator }: any) {
+    this.incidentUseCase = coreContainer.incidentUseCase;
+    this._validator = validator;
   }
 
   register(router: HttpRouter) {
     router
       .route('/incidents')
       .post(
+        this._validator(postIncident),
         this.createIncident.bind(this),
       )
       .get(
+        this._validator(getIncidents),
         this.findAllIncidents.bind(this),
       );
 

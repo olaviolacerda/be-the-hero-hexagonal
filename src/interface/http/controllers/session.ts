@@ -1,20 +1,22 @@
 import { NextFunction, Request, Response } from 'express';
 import httpStatus from 'http-status-codes';
-import { Container } from '../../../types/core';
 import { HttpRouter, IHttpRoute } from '../../../types/interface/http';
 import { ISessionUseCase } from '../../../types/session';
 
 export class SessionController implements IHttpRoute {
   private readonly sessionUseCase: ISessionUseCase;
+  private readonly _validator: Function;
 
-  constructor({ sessionUseCase }: Container) {
-    this.sessionUseCase = sessionUseCase;
+  constructor({ coreContainer, validator }: any) {
+    this._validator = validator;
+    this.sessionUseCase = coreContainer.sessionUseCase;
   }
 
   register(router: HttpRouter) {
     router
       .route('/sessions')
       .post(
+        this._validator(postSession),
         this.createSession.bind(this),
       );
   }
