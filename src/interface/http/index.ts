@@ -2,6 +2,7 @@ import bodyParser from 'body-parser';
 import express from 'express';
 import { Container } from '../../types/core';
 import { IHttpRoute } from '../../types/interface/http';
+import { IncidentController } from './controllers/incident';
 import { OngController } from './controllers/ong';
 
 interface IHttpInterface {
@@ -27,6 +28,7 @@ export class HttpInterface implements IHttpInterface {
   setupRoutes() {
     [
       new OngController(this.coreContainer),
+      new IncidentController(this.coreContainer),
     ]
       .forEach((route: IHttpRoute) => {
         const router = express.Router({ mergeParams: true });
