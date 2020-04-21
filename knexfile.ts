@@ -1,14 +1,15 @@
-import Knex from "knex";
+import * as Knex from "knex";
+import env from "./src/utils/env";
 
 const database = {
-  client: 'sqlite3',
-  debug: true,
+  client: env.dbClient,
+  debug: env.dbDebug || false,
   connection: {
-    filename: './src/database/db.sqlite',
-    supportBigNumbers: true,
-    bigNumberStrings: true,
-    multipleStatements: true,
-    dateStrings: true,
+    host: env.dbHost,
+    port: env.dbPort,
+    user: env.dbUser,
+    password: env.dbPassword,
+    database: env.dbSchema,
   },
   migrations: {
     directory: './src/database/migrations'
@@ -16,4 +17,4 @@ const database = {
   useNullAsDefault: true,
 } as Knex.Config;
 
-export = database
+export = database;
