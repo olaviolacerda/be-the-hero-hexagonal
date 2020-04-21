@@ -1,4 +1,5 @@
 import bodyParser from 'body-parser';
+import cors from 'cors';
 import express from 'express';
 import { Container } from '../../types/core';
 import { IHttpRoute } from '../../types/interface/http';
@@ -23,6 +24,7 @@ export class HttpInterface implements IHttpInterface {
     this.app = express();
 
     this.app.use(
+      cors(),
       bodyParser.json(),
     );
   }

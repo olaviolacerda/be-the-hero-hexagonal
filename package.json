@@ -16,6 +16,7 @@
     "typescript": "^3.8.3"
   },
   "dependencies": {
+    "cors": "^2.8.5",
     "crypto": "^1.0.1",
     "express": "^4.17.1",
     "http-status-codes": "^1.4.0",
