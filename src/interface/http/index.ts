@@ -5,6 +5,7 @@ import { IHttpRoute } from '../../types/interface/http';
 import { IncidentController } from './controllers/incident';
 import { OngController } from './controllers/ong';
 import { ProfileController } from './controllers/profile';
+import { SessionController } from './controllers/session';
 
 interface IHttpInterface {
   serve(): void;
@@ -31,6 +32,7 @@ export class HttpInterface implements IHttpInterface {
       new OngController(this.coreContainer),
       new IncidentController(this.coreContainer),
       new ProfileController(this.coreContainer),
+      new SessionController(this.coreContainer),
     ]
       .forEach((route: IHttpRoute) => {
         const router = express.Router({ mergeParams: true });

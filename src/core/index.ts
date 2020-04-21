@@ -4,6 +4,7 @@ import { OngService } from './services/ong';
 import { IncidentUseCase } from './useCases/incident';
 import { OngUseCase } from './useCases/ong';
 import { ProfileUseCase } from './useCases/profile';
+import { SessionUseCase } from './useCases/session';
 
 export function createContainer(config: ContainerConfig): Container {
   const serviceContext = {
@@ -20,5 +21,6 @@ export function createContainer(config: ContainerConfig): Container {
     ongUseCase: new OngUseCase(useCaseContext),
     incidentUseCase: new IncidentUseCase(useCaseContext),
     profileUseCase: new ProfileUseCase(useCaseContext),
+    sessionUseCase: new SessionUseCase(useCaseContext),
   };
 }

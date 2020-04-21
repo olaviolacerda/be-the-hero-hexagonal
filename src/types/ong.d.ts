@@ -15,6 +15,7 @@ export interface IOngRepository {
 export interface IOngService {
   createOng(user: Partial<Ong>): Promise<Ong['id']>;
   findOngsByParams(params: Partial<Ong>): Promise<Ong[]>;
+  findOngById(ongId: Ong['id']): Promise<Ong>;
 }
 
 export interface IOngUseCase {

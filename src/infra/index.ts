@@ -6,12 +6,17 @@ import { OngRepository } from './repositories/ong';
 
 export function createContainer(config: ContainerConfig): Container {
   const dbConnection = database();
-  const mysqlAdapter = new MysqlAdapter({
-    dbConnection,
-  })
 
   return {
-    ongRepository: new OngRepository({ mysqlAdapter }),
-    incidentRepository: new IncidentRepository({ mysqlAdapter }),
+    ongRepository: new OngRepository({
+      mysqlAdapter: new MysqlAdapter({
+        dbConnection,
+      })
+    }),
+    incidentRepository: new IncidentRepository({
+      mysqlAdapter: new MysqlAdapter({
+        dbConnection,
+      })
+    }),
   };
 }

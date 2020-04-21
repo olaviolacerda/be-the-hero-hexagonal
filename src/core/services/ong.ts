@@ -15,4 +15,10 @@ export class OngService implements IOngService {
   async findOngsByParams(params: any): Promise<Ong[]> {
     return this.ongRepository.findOng(params);
   }
+
+  async findOngById(id: Ong['id']): Promise<Ong> {
+    const [ong] = await this.ongRepository.findOng({ id });
+
+    return ong;
+  }
 }
