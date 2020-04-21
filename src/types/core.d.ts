@@ -1,10 +1,12 @@
 import { IIncidentService, IIncidentUseCase } from './incident';
 import { Container as infraContainer } from './infra';
 import { IOngService, IOngUseCase } from './ong';
+import { IProfileUseCase } from './profile';
 
 export type Container = {
   ongUseCase: IOngUseCase;
   incidentUseCase: IIncidentUseCase;
+  profileUseCase: IProfileUseCase;
 };
 
 export type ContainerConfig = {

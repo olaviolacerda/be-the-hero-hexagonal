@@ -30,7 +30,7 @@ export class IncidentController implements IHttpRoute {
   async createIncident(req: HttpRequest, res: HttpResponse, next: HttpNext) {
     try {
       const { title, description, value } = req.body;
-      const ong_id = req.headers.authorization;
+      const ong_id = req.headers?.authorization;
 
       const [id] = await this.incidentUseCase.createIncident({
         title, description, value, ong_id
@@ -55,7 +55,7 @@ export class IncidentController implements IHttpRoute {
   async deleteIncidentById(req: HttpRequest, res: HttpResponse, next: HttpNext) {
     try {
       const { id } = req.params;
-      const ong_id = req.headers.authorization;
+      const ong_id = req.headers?.authorization;
 
       const incident = await this.incidentUseCase.findIncidentById(id);
 

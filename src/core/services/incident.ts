@@ -12,17 +12,20 @@ export class IncidentService implements IIncidentService {
     return this.incidentRepository.createIncident(incident);
   }
 
-  async findIncidentsByParams(params: any): Promise<Incident[]> {
+  async findIncidentsByParams(params: Partial<Incident>): Promise<Incident[]> {
     return this.incidentRepository.findIncident(params);
   }
 
-  async findIncidentById(id: string): Promise<Incident> {
+  async findIncidentById(id: Incident['id']): Promise<Incident> {
     const [incident] = await this.incidentRepository.findIncident({ id });
     return incident;
   }
 
-  async deleteIncidentById(id: string): Promise<boolean> {
-    return this.incidentRepository.deleteIncident({ id });
+  async findIncidentsByOngId(ong_id: Incident['ong_id']): Promise<Incident[]> {
+    return this.incidentRepository.findIncident({ ong_id });
   }
 
+  async deleteIncidentById(id: Incident['id']): Promise<boolean> {
+    return this.incidentRepository.deleteIncident({ id });
+  }
 }

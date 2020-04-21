@@ -9,12 +9,12 @@ export type Ong = {
 
 export interface IOngRepository {
   createOng(ong: Partial<Ong>): Promise<Ong['id']>;
-  findOng(params: any): Promise<Ong[]>;
+  findOng(params: Partial<Ong>): Promise<Ong[]>;
 }
 
 export interface IOngService {
   createOng(user: Partial<Ong>): Promise<Ong['id']>;
-  findOngsByParams(params: any): Promise<Ong[]>;
+  findOngsByParams(params: Partial<Ong>): Promise<Ong[]>;
 }
 
 export interface IOngUseCase {
