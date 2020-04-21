@@ -2,6 +2,7 @@ import { NextFunction, Request, Response } from 'express';
 import httpStatus from 'http-status-codes';
 import { HttpRouter, IHttpRoute } from '../../../types/interface/http';
 import { ISessionUseCase } from '../../../types/session';
+import { postSession } from '../schemas/session';
 
 export class SessionController implements IHttpRoute {
   private readonly sessionUseCase: ISessionUseCase;

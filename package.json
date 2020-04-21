@@ -19,10 +19,12 @@
   },
   "dependencies": {
     "@hapi/joi": "^17.1.1",
+    "@types/errorhandler": "^1.5.0",
     "@types/hapi__joi": "^16.0.12",
     "cors": "^2.8.5",
     "crypto": "^1.0.1",
     "dotenv": "^8.2.0",
+    "errorhandler": "^1.5.1",
     "express": "^4.17.1",
     "http-status-codes": "^1.4.0",
     "knex": "^0.21.0",

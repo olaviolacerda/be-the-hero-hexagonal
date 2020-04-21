@@ -1,7 +1,7 @@
 import httpStatus from 'http-status-codes';
 import { IIncidentUseCase } from '../../../types/incident';
 import { HttpNext, HttpRequest, HttpResponse, HttpRouter, IHttpRoute } from '../../../types/interface/http';
-import { getIncidents, postIncident } from '../schemas/incident';
+import { deleteIncident, getIncidents, postIncident } from '../schemas/incident';
 
 export class IncidentController implements IHttpRoute {
   private readonly incidentUseCase: IIncidentUseCase;
@@ -27,6 +27,7 @@ export class IncidentController implements IHttpRoute {
     router
       .route('/incidents/:id')
       .delete(
+        this._validator(deleteIncident),
         this.deleteIncidentById.bind(this),
       );
   }

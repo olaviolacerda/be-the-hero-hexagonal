@@ -5,18 +5,20 @@ import { IncidentRepository } from './repositories/incident';
 import { OngRepository } from './repositories/ong';
 
 export function createContainer(config: ContainerConfig): Container {
-  const dbConnection = database();
+  const createMysqlAdapter = () => {
+    const dbConnection = database();
+    
+    return new MysqlAdapter({
+      dbConnection,
+    });
+  };
 
   return {
     ongRepository: new OngRepository({
-      mysqlAdapter: new MysqlAdapter({
-        dbConnection,
-      })
+      mysqlAdapter: createMysqlAdapter(),
     }),
     incidentRepository: new IncidentRepository({
-      mysqlAdapter: new MysqlAdapter({
-        dbConnection,
-      })
+      mysqlAdapter: createMysqlAdapter(),
     }),
   };
 }
