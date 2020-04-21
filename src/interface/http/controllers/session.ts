@@ -24,9 +24,9 @@ export class SessionController implements IHttpRoute {
 
       const { id } = req.body;
 
-      const session = await this.sessionUseCase.createSession(id);
+      const ong = await this.sessionUseCase.createSession(id);
 
-      res.status(httpStatus.OK).send(session);
+      res.status(httpStatus.OK).send(ong);
     } catch (err) {
       next(err);
     }

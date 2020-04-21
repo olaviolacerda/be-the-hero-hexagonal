@@ -19,10 +19,21 @@ export class IncidentRepository implements IIncidentRepository {
       .insert(incident);
   }
 
-  async findIncident(params: any): Promise<Incident[]> {
+  async findIncident(params: any, filters?: any): Promise<Incident[]> {
     return this.mysqlAdapter
       .db
-      .where(params);
+      .join('ongs', 'ongs.id', '=', 'incidents.ong_id')
+      .where(params)
+      .limit(filters?.limit)
+      .offset(filters?.offset)
+      .select([
+        'incidents.*',
+        'ongs.name',
+        'ongs.email',
+        'ongs.whatsapp',
+        'ongs.city',
+        'ongs.uf'
+      ]);
   }
 
   async deleteIncident(params: any): Promise<boolean> {
@@ -30,5 +41,11 @@ export class IncidentRepository implements IIncidentRepository {
       .db
       .where(params)
       .del();
+  }
+
+  async countAllIncidents(): Promise<any> {
+    return this.mysqlAdapter
+      .db
+      .count();
   }
 }

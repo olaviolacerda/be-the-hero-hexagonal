@@ -12,8 +12,8 @@ export class IncidentService implements IIncidentService {
     return this.incidentRepository.createIncident(incident);
   }
 
-  async findIncidentsByParams(params: Partial<Incident>): Promise<Incident[]> {
-    return this.incidentRepository.findIncident(params);
+  async findIncidentsByParams(params: Partial<Incident>, filters?: any): Promise<Incident[]> {
+    return this.incidentRepository.findIncident(params, filters);
   }
 
   async findIncidentById(id: Incident['id']): Promise<Incident> {
@@ -27,5 +27,9 @@ export class IncidentService implements IIncidentService {
 
   async deleteIncidentById(id: Incident['id']): Promise<boolean> {
     return this.incidentRepository.deleteIncident({ id });
+  }
+
+  async countAllIncidents(): Promise<number> {
+    return this.incidentRepository.countAllIncidents();
   }
 }

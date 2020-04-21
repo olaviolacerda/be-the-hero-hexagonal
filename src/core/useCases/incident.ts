@@ -20,7 +20,11 @@ export class IncidentUseCase implements IIncidentUseCase {
     return this.incidentService.createIncident(incident);
   }
 
-  findAllIncidents() {
-    return this.incidentService.findIncidentsByParams({});
+  findAllIncidents(filters: any) {
+    return this.incidentService.findIncidentsByParams({}, filters);
+  }
+
+  countAllIncidents() {
+    return this.incidentService.countAllIncidents();
   }
 }

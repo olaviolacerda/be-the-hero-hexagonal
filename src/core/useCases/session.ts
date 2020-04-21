@@ -14,6 +14,8 @@ export class SessionUseCase implements ISessionUseCase {
 
     if (!ong) throw new Error('No ONG was found with the given ID.');
 
-    return ong;
+    return {
+      name: ong.name,
+    };
   }
 }

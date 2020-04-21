@@ -44,7 +44,16 @@ export class IncidentController implements IHttpRoute {
 
   async findAllIncidents(req: HttpRequest, res: HttpResponse, next: HttpNext) {
     try {
-      const incidents = await this.incidentUseCase.findAllIncidents();
+      const { page = 1 } = req.query;
+      const limit = 5;
+      // @ts-ignore
+      const offset = (page - 1) * limit;
+
+      const [count] = await this.incidentUseCase.countAllIncidents();
+
+      const incidents = await this.incidentUseCase.findAllIncidents({ offset, limit });
+
+      res.header('X-Total-Count', count['count(*)']);
 
       res.status(httpStatus.OK).send(incidents);
     } catch (err) {
