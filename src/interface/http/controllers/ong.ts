@@ -1,4 +1,3 @@
-import crypto from 'crypto';
 import httpStatus from 'http-status-codes';
 import { Container } from '../../../types/core';
 import { HttpNext, HttpRequest, HttpResponse, HttpRouter, IHttpRoute } from '../../../types/interface/http';
@@ -26,10 +25,8 @@ export class OngController implements IHttpRoute {
     try {
       const { name, email, whatsapp, city, uf } = req.body;
 
-      const ongId = crypto.randomBytes(4).toString('HEX');
-
       const [id] = await this.ongUseCase.createOng({
-        id: ongId, name, email, whatsapp, city, uf
+        name, email, whatsapp, city, uf
       });
 
       res.status(httpStatus.CREATED).send({ id });

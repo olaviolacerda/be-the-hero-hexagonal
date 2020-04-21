@@ -8,7 +8,7 @@ export class OngService implements IOngService {
     this.ongRepository = ctx.ongRepository;
   }
 
-  createOng(ong: Partial<Ong>): Promise<string> {
+  async createOng(ong: Partial<Ong>): Promise<string> {
     return this.ongRepository.createOng(ong);
   }
 

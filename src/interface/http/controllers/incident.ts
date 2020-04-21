@@ -19,6 +19,12 @@ export class IncidentController implements IHttpRoute {
       .get(
         this.findAllIncidents.bind(this),
       );
+
+    router
+      .route('/incidents/:id')
+      .delete(
+        this.deleteIncidentById.bind(this),
+      );
   }
 
   async createIncident(req: HttpRequest, res: HttpResponse, next: HttpNext) {
@@ -41,6 +47,29 @@ export class IncidentController implements IHttpRoute {
       const incidents = await this.incidentUseCase.findAllIncidents();
 
       res.status(httpStatus.OK).send(incidents);
+    } catch (err) {
+      next(err);
+    }
+  }
+
+  async deleteIncidentById(req: HttpRequest, res: HttpResponse, next: HttpNext) {
+    try {
+      const { id } = req.params;
+      const ong_id = req.headers.authorization;
+
+      const incident = await this.incidentUseCase.findIncidentById(id);
+
+      // TODO: Revisar responsabilidade
+      if (incident.ong_id !== ong_id) {
+        return res.status(httpStatus.UNAUTHORIZED)
+          .send({
+            error: 'Operation not permitted.'
+          });
+      }
+
+      await this.incidentUseCase.deleteIncidentById(id);
+
+      res.status(httpStatus.NO_CONTENT).send();
     } catch (err) {
       next(err);
     }

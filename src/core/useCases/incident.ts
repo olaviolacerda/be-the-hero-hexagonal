@@ -7,12 +7,20 @@ export class IncidentUseCase implements IIncidentUseCase {
   constructor(ctx: UseCaseContext) {
     this.incidentService = ctx.incidentService;
   }
+
+  findIncidentById(id: string) {
+    return this.incidentService.findIncidentById(id);
+  }
+  
+  deleteIncidentById(id: string) {
+    return this.incidentService.deleteIncidentById(id);
+  }
   
   createIncident(incident: Partial<Incident>) {
     return this.incidentService.createIncident(incident);
   }
 
   findAllIncidents() {
-    return this.incidentService.findIncidentsByParams('*');
+    return this.incidentService.findIncidentsByParams({});
   }
 }

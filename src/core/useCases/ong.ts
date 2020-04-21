@@ -19,6 +19,6 @@ export class OngUseCase implements IOngUseCase {
   }
 
   findAllOngs() {
-    return this.ongService.findOngsByParams('*');
+    return this.ongService.findOngsByParams({});
   }
 }

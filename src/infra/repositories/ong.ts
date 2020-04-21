@@ -22,6 +22,6 @@ export class OngRepository implements IOngRepository {
   async findOng(params: any): Promise<Ong[]> {
     return this.mysqlAdapter
       .db
-      .select(params);
+      .where(params);
   }
 }

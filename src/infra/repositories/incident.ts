@@ -22,6 +22,13 @@ export class IncidentRepository implements IIncidentRepository {
   async findIncident(params: any): Promise<Incident[]> {
     return this.mysqlAdapter
       .db
-      .select(params);
+      .where(params);
+  }
+
+  async deleteIncident(params: any): Promise<boolean> {
+    return this.mysqlAdapter
+      .db
+      .where(params)
+      .del();
   }
 }
