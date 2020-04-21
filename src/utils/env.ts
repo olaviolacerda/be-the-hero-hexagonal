@@ -7,7 +7,7 @@ const env = {
   
   dbClient: process.env.DB_CLIENT || 'mysql2',
   dbPort: parseInt(process.env.DB_PORT || '', 10),
-  dbHost: process.env.DB_HOST,
+  dbHost: process.env.DB_HOST || 'localhost',
   dbUser: process.env.DB_USER,
   dbPassword: process.env.DB_PASSWORD,
   dbSchema: process.env.DB_SCHEMA,

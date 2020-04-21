@@ -8,3 +8,4 @@ export type HttpNext = NextFunction;
 export interface IHttpRoute {
   register(r: HttpRouter): void;
 }
+

@@ -1,6 +1,7 @@
 import bodyParser from 'body-parser';
 import cors from 'cors';
 import express from 'express';
+import { Env } from '../../types';
 import { Container } from '../../types/core';
 import { IHttpRoute } from '../../types/interface/http';
 import { IncidentController } from './controllers/incident';
@@ -15,7 +16,7 @@ interface IHttpInterface {
 }
 
 type Config = {
-  env: typeof import('../../utils/env').default;
+  env: Env;
   coreContainer: Container;
 };
 

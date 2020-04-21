@@ -8,7 +8,7 @@ export const errorHandler = (err: Error, req: HttpRequest, res: HttpResponse, ne
   return res
     .status(status)
     .send({
-      name: throwErr.name,
+      code: throwErr.name,
       message: throwErr.message,
     });
 };

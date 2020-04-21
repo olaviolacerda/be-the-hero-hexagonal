@@ -1,13 +1,13 @@
 import { createContainer as coreContainer } from './core';
 import { createContainer as infraContainer } from './infra';
 import { HttpInterface } from './interface/http';
+import { AppConfig } from './types';
 import { Container } from './types/core';
 
-
 export class Application {
-  private readonly config: any;
+  private readonly config: AppConfig;
 
-  constructor(config: any) {
+  constructor(config: AppConfig) {
     this.config = config;
   }
 
