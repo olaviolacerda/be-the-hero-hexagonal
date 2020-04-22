@@ -1,4 +1,4 @@
-import crypto from 'crypto';
+import generateUniqueId from '../../helpers/generateUniqueId';
 import { UseCaseContext } from '../../types/core';
 import { IOngUseCase, Ong } from '../../types/ong';
 
@@ -10,7 +10,7 @@ export class OngUseCase implements IOngUseCase {
   }
   
   createOng(ong: Partial<Ong>) {
-    const id = crypto.randomBytes(4).toString('HEX');
+    const id = generateUniqueId();
 
     return this.ongService.createOng({
       ...ong,

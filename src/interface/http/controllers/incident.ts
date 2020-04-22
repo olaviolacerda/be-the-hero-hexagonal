@@ -7,8 +7,8 @@ export class IncidentController implements IHttpRoute {
   private readonly incidentUseCase: IIncidentUseCase;
   private readonly _validator: Function;
 
-  constructor({ coreContainer, validator }: any) {
-    this.incidentUseCase = coreContainer.incidentUseCase;
+  constructor({ container, validator }: any) {
+    this.incidentUseCase = container.incidentUseCase;
     this._validator = validator;
   }
 

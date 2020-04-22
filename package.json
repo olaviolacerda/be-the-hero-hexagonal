@@ -5,30 +5,38 @@
   "license": "MIT",
   "scripts": {
     "dev": "nodemon src/index.ts",
+    "test": "cross-env NODE_ENV=test jest",
     "migrate:create": "./node_modules/knex/bin/cli.js migrate:make $MIGRATE_NAME --env local",
     "migrate:up": "./node_modules/knex/bin/cli.js migrate:latest --env local"
   },
   "devDependencies": {
+    "@hapi/joi": "^17.1.1",
     "@types/body-parser": "^1.19.0",
     "@types/cors": "^2.8.6",
     "@types/express": "^4.17.6",
-    "sqlite": "^4.0.7",
-    "sqlite3": "^4.1.1",
+    "@types/hapi__joi": "^16.0.12",
+    "@types/jest": "^25.2.1",
+    "@types/mock-knex": "^0.4.2",
+    "@types/node": "^13.13.1",
+    "@types/sinon": "^9.0.0",
+    "@types/supertest": "^2.0.8",
+    "jest": "^25.4.0",
+    "mock-knex": "^0.4.8",
+    "nodemon": "^2.0.3",
+    "sinon": "^9.0.2",
+    "supertest": "^4.0.2",
+    "ts-jest": "^25.4.0",
     "ts-node": "^8.9.0",
     "typescript": "^3.8.3"
   },
   "dependencies": {
-    "@hapi/joi": "^17.1.1",
-    "@types/errorhandler": "^1.5.0",
-    "@types/hapi__joi": "^16.0.12",
     "cors": "^2.8.5",
+    "cross-env": "^7.0.2",
     "crypto": "^1.0.1",
     "dotenv": "^8.2.0",
-    "errorhandler": "^1.5.1",
     "express": "^4.17.1",
     "http-status-codes": "^1.4.0",
     "knex": "^0.21.0",
-    "mysql2": "^2.1.0",
-    "nodemon": "^2.0.3"
+    "mysql2": "^2.1.0"
   }
 }

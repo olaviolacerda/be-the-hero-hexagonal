@@ -1,3 +1,5 @@
+import { Ports } from "./interface"
+
 type Env = {
   readonly httpPort: number;
   readonly dbPort: number;
@@ -10,10 +12,5 @@ type Env = {
 
 export type AppConfig = {
   env: Env;
-}
-
-export interface ICodedError {
-  message: string;
-  code: string;
-  details?: object;
+  ports: Ports;
 }

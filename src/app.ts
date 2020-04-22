@@ -1,33 +1,22 @@
-import { createContainer as coreContainer } from './core';
-import { createContainer as infraContainer } from './infra';
-import { HttpInterface } from './interface/http';
+
+import { createContainer as interfaceContainer } from './interface';
 import { AppConfig } from './types';
-import { Container } from './types/core';
 
 export class Application {
-  private readonly config: AppConfig;
+  private readonly ports: AppConfig['ports'];
+  private readonly env: AppConfig['env'];
 
-  constructor(config: AppConfig) {
-    this.config = config;
+  constructor({ ports, env }: AppConfig) {
+    this.ports = ports;
+    this.env = env;
   }
 
-  private async initHttpServer(coreContainer: Container): Promise<void> {
-    const httpServer = new HttpInterface({ coreContainer, env: this.config.env });
-    httpServer.serve();
-  }
-
-  /**
-   * Start all servers
-   */
-  private async initServers(): Promise<void> {
-    const container = coreContainer(infraContainer({}));
-    await this.initHttpServer(container);
-  }
-
-  /**
-   * Start the app
-   */
   async start(): Promise<void> {
-    await this.initServers();
+    const container = interfaceContainer({
+      env: this.env, ports: this.ports
+    });
+
+    if (this.ports?.http)
+      container.httpInterface?.serve();
   }
 }

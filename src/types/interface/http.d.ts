@@ -9,3 +9,6 @@ export interface IHttpRoute {
   register(r: HttpRouter): void;
 }
 
+export interface IHttpInterface {
+  serve(): void;
+}

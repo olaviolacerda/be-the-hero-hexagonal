@@ -4,8 +4,8 @@ dotenv.config();
 
 const env = {
   httpPort: parseInt(process.env.HTTP_PORT || '', 10),
-  
-  dbClient: process.env.DB_CLIENT || 'mysql2',
+
+  dbClient: 'mysql2',
   dbPort: parseInt(process.env.DB_PORT || '', 10),
   dbHost: process.env.DB_HOST || 'localhost',
   dbUser: process.env.DB_USER,

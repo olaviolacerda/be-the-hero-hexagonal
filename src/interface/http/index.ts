@@ -3,17 +3,13 @@ import cors from 'cors';
 import express from 'express';
 import { Env } from '../../types';
 import { Container } from '../../types/core';
-import { IHttpRoute } from '../../types/interface/http';
+import { IHttpInterface, IHttpRoute } from '../../types/interface/http';
 import { IncidentController } from './controllers/incident';
 import { OngController } from './controllers/ong';
 import { ProfileController } from './controllers/profile';
 import { SessionController } from './controllers/session';
 import { errorHandler } from './middlewares/errorHandler';
 import { validator } from './middlewares/validator';
-
-interface IHttpInterface {
-  serve(): void;
-}
 
 type Config = {
   env: Env;
@@ -40,7 +36,7 @@ export class HttpInterface implements IHttpInterface {
   }
 
   setupRoutes() {
-    const controllerConfig = { coreContainer: this.coreContainer, validator };
+    const controllerConfig = { container: this.coreContainer, validator };
 
     [
       new OngController(controllerConfig),

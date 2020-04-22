@@ -8,9 +8,9 @@ export class ProfileController implements IHttpRoute {
   private readonly profileUseCase: IProfileUseCase;
   private readonly _validator: Function;
 
-  constructor({ coreContainer, validator }: any) {
+  constructor({ container, validator }: any) {
     this._validator = validator;
-    this.profileUseCase = coreContainer.profileUseCase;
+    this.profileUseCase = container.profileUseCase;
   }
 
   register(router: HttpRouter) {

@@ -7,9 +7,9 @@ export class OngController implements IHttpRoute {
   private readonly ongUseCase: IOngUseCase;
   private readonly _validator: Function;
 
-  constructor({ coreContainer, validator }: any) {
+  constructor({ container, validator }: any) {
     this._validator = validator;
-    this.ongUseCase = coreContainer.ongUseCase;
+    this.ongUseCase = container.ongUseCase;
   }
 
   register(router: HttpRouter) {

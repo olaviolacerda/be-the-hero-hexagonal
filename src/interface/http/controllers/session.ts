@@ -8,9 +8,9 @@ export class SessionController implements IHttpRoute {
   private readonly sessionUseCase: ISessionUseCase;
   private readonly _validator: Function;
 
-  constructor({ coreContainer, validator }: any) {
+  constructor({ container, validator }: any) {
     this._validator = validator;
-    this.sessionUseCase = coreContainer.sessionUseCase;
+    this.sessionUseCase = container.sessionUseCase;
   }
 
   register(router: HttpRouter) {
